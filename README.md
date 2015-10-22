@@ -26,4 +26,4 @@ Planned Features
 * Exploding Dice - Many systems have people reroll dice if they are high enough. In this case, we want to reroll dice if they are at least a certain number. Sample Usage - `4d6e6`
 
 
-Feel free to file more feature requests at 
+Feel free to file more feature requests at https://github.com/KevinGreene/DiceRoller
