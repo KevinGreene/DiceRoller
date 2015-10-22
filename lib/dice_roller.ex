@@ -1,7 +1,7 @@
 defmodule DiceRoller do
   import Enum
     
-  def dice_regex do
+  defp dice_regex do
     {_, r} =  Regex.compile "([0-9]+)(d[0-9]+|f)?([ks][0-9]+)?"
     r
   end
@@ -14,7 +14,7 @@ defmodule DiceRoller do
     |> sum
   end
 
-  def roll_dice_term(dice_term) do
+  defp roll_dice_term(dice_term) do
 
     case Regex.run(dice_regex, dice_term) do
       
@@ -58,7 +58,7 @@ defmodule DiceRoller do
     end
   end
 
-  def build_dice_array(number, dice) do
+  defp build_dice_array(number, dice) do
     cond do
       number > 500 -> {:error, "Don't roll that many dice"}
       dice > 500 -> {:error, "Don't roll dice that high"}
@@ -66,7 +66,7 @@ defmodule DiceRoller do
     end
   end
 
-  def build_exploding_dice_array(number, dice) do
+  defp build_exploding_dice_array(number, dice) do
     cond do
       number > 500 -> {:error, "Don't roll that many dice"}
       dice > 500 -> {:error, "Don't roll dice that high"}
@@ -74,7 +74,7 @@ defmodule DiceRoller do
     end
   end
   
-  def build_fudge_dice_array(number) do
+  defp build_fudge_dice_array(number) do
     cond do
       number > 500 -> {:error, "Don't roll that many dice"}
       true -> {:ok, (for _ <- 1..number, do: :random.uniform(3) - 2)}
