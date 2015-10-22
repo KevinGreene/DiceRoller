@@ -9,6 +9,7 @@ defmodule DiceRoller.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps,
      package: package,
+     docs: [extras: ["README.md"]]
     ]
   end
 
@@ -29,7 +30,9 @@ defmodule DiceRoller.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [{:earmark, "~> 0.1", only: :dev},
+     {:ex_doc, "~> 0.10", only: :dev},
+    ]
   end
 
   defp package do
