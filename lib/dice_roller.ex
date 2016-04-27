@@ -1,21 +1,22 @@
 defmodule DiceRoller do
   import Enum
     
-  defp dice_regex do
-    {_, r} =  Regex.compile "([0-9]+)(d[0-9]+|f)?([ks][0-9]+)?"
+  def dice_regex do
+    {_, r} =  Regex.compile "(-?[0-9]+)(d[0-9]+|f)?([ks][0-9]+)?"
     r
   end
 
   def roll_dice(dice_string) do
     IO.puts "Rolling the die"
-    String.split(dice_string, "+")
+    String.replace(dice_string, "+", " ")
+    |> String.replace("-", " -")
+    |> String.split
     |> map(fn(x) -> String.strip(x) end)
     |> map(fn(x) -> roll_dice_term(x) end)
     |> sum
   end
 
   defp roll_dice_term(dice_term) do
-
     case Regex.run(dice_regex, dice_term) do
       
       [_, n_s] ->
@@ -48,10 +49,14 @@ defmodule DiceRoller do
           ["s" <> s_i] ->
             s = String.to_integer(s_i)
             IO.puts "Successes"
-          dice_array |> count fn(x) -> x >= s end
+          dice_array |> count( fn(x) -> x >= s end )
 
           _ -> 
-            sum dice_array
+            if n > 0 do
+              sum dice_array
+            else
+              -1 * sum dice_array
+            end
         end
 
 
@@ -62,6 +67,7 @@ defmodule DiceRoller do
     cond do
       number > 500 -> {:error, "Don't roll that many dice"}
       dice > 500 -> {:error, "Don't roll dice that high"}
+      number < 0 -> build_dice_array(-number, dice)
       true -> {:ok, (for _ <- 1..number, do: :random.uniform dice)}
     end
   end
