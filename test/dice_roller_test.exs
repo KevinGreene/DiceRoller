@@ -9,12 +9,6 @@ defmodule DiceRollerTest do
     assert [_, "10", "d10", "s10"] = Regex.run dice_regex, "10d10s10"
   end
 
-  test "Shouldn't return :ok for high numbers / dice" do
-    assert {:error, "Don't roll that many dice"} = DiceRoller.roll_dice("1000d6")
-    assert {:error, _} = DiceRoller.roll_dice("6d1000")
-  end
-
-  
   test "Should return negative numbers" do
     assert -5 = DiceRoller.roll_dice("-5")
     assert 0 > DiceRoller.roll_dice("1d6-7")

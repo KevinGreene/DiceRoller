@@ -32,6 +32,7 @@ defmodule DiceRoller do
             "d" <> d_i ->
               d = String.to_integer(d_i)
               build_dice_array(n, d)
+
           end
         IO.puts "Rolled the dice!: "
         IO.inspect dice_array
