@@ -4,7 +4,7 @@ defmodule DiceRoller.Mixfile do
   def project do
     [app: :dice_roller,
      description: "An Elixir library for simulating dice rolls",
-     version: "1.0.1",
+     version: "1.1.0",
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
